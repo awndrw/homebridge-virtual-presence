@@ -1,1 +1,1 @@
-# homebridge-plugin-virtual-presence
+# homebridge-virtual-presence

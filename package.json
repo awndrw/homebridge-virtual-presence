@@ -1,15 +1,15 @@
 {
 	"displayName": "Virtual Presence",
-	"name": "homebridge-plugin-virtual-presence",
+	"name": "homebridge-virtual-presence",
 	"version": "1.0.0",
 	"description": "Allows for the creation of presence detecting switches that are combined into an occupancy sensor.",
 	"license": "Apache-2.0",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/wiggindev/homebridge-plugin-virtual-presence.git"
+		"url": "git://github.com/wiggindev/homebridge-virtual-presence.git"
 	},
 	"bugs": {
-		"url": "https://github.com/wiggindev/homebridge-plugin-virtual-presence/issues"
+		"url": "https://github.com/wiggindev/homebridge-virtual-presence/issues"
 	},
 	"main": "dist/index.js",
 	"files": [

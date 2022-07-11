@@ -1087,9 +1087,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"homebridge-plugin-virtual-presence@workspace:.":
+"homebridge-virtual-presence@workspace:.":
   version: 0.0.0-use.local
-  resolution: "homebridge-plugin-virtual-presence@workspace:."
+  resolution: "homebridge-virtual-presence@workspace:."
   dependencies:
     "@types/node": ^18.0.3
     "@typescript-eslint/eslint-plugin": ^5.30.5
