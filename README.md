@@ -1,6 +1,5 @@
 # Homebridge Virtual Presence Plugin
 
-- [Homebridge Virtual Presence Plugin](#homebridge-virtual-presence-plugin)
 - [Why](#why)
 - [Example](#example)
   - [Example config.json](#example-configjson)
