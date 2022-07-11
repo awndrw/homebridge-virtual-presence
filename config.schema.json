@@ -2,6 +2,8 @@
   "pluginAlias": "VirtualPresence",
   "pluginType": "accessory",
   "singular": false,
+  "headerDisplay": "The Virtual Presence plugin allows you to create a virtual occupancy sensor for your home.\nTo get started, create a switch for each member of your household (or group within the household).",
+  "footerDisplay": "Each switch must be triggered by a pair of Arrive/Leave automations. When all the switches are off, the occupancy sensor will stop detecting presence.",
   "schema": {
     "type": "object",
     "properties": {
@@ -10,7 +12,7 @@
         "description": "Name of the occupancy sensor",
         "type": "string",
         "required": true,
-        "default": "Occupancy Sensor"
+        "placeholder": "Occupancy Sensor"
       },
       "switches": {
         "title": "Switches",
@@ -20,7 +22,8 @@
         "items": {
           "title": "Switch",
           "description": "Name of the switch",
-          "type": "string"
+          "type": "string",
+          "required": true
         }
       }
     }
