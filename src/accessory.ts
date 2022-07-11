@@ -7,15 +7,12 @@ import {
 } from 'homebridge';
 import { VirtualPresenceConfig } from './types';
 
-const DEFAULT_OCCUPANCY_SENSOR_NAME = 'Occupancy Sensor';
-const DEFAULT_SWITCH_NAME = 'Switch';
+const OCCUPANCY_SENSOR_UUID = (idx: number) => `OccupancySensor.${idx}`;
+const SWITCH_UUID = (idx: number) => `Switch.${idx}`;
 
 export class VirtualPresence implements AccessoryPlugin {
 	public readonly informationService: Service;
 	public readonly occupancyService: Service;
-
-	private readonly Service: API['hap']['Service'];
-	private readonly Characteristic: API['hap']['Characteristic'];
 
 	private switches: Switch[] = [];
 
@@ -24,29 +21,26 @@ export class VirtualPresence implements AccessoryPlugin {
 		public readonly config: VirtualPresenceConfig,
 		public readonly api: API
 	) {
-		this.Service = this.api.hap.Service;
-		this.Characteristic = this.api.hap.Characteristic;
+		const Service = this.api.hap.Service;
+		const Characteristic = this.api.hap.Characteristic;
 
-		this.log.debug(
-			`VirtualPresence plugin loaded with config ${JSON.stringify(
-				config
-			)}`
-		);
+		this.config.accessory = this.config.name;
 
-		this.informationService = new this.Service.AccessoryInformation()
-			.setCharacteristic(this.Characteristic.Manufacturer, 'wiggindev')
-			.setCharacteristic(this.Characteristic.Model, 'Default-Model');
+		this.informationService = new Service.AccessoryInformation()
+			.setCharacteristic(Characteristic.Manufacturer, 'wiggindev')
+			.setCharacteristic(Characteristic.Model, 'Default-Model');
 
-		this.occupancyService = new this.Service.OccupancySensor(
-			this.config.occupancyName || DEFAULT_OCCUPANCY_SENSOR_NAME
+		this.occupancyService = new Service.OccupancySensor(
+			this.config.occupancyName,
+			this.api.hap.uuid.generate(OCCUPANCY_SENSOR_UUID(0))
 		);
 		this.occupancyService
-			.getCharacteristic(this.Characteristic.OccupancyDetected)
-			.onGet(this.getOccupancyDetected);
+			.getCharacteristic(Characteristic.OccupancyDetected)
+			.onGet(this.getOccupancyDetected.bind(this));
 
 		(this.config.switches || []).forEach((name, idx) => {
-			const switchName = name || `${DEFAULT_SWITCH_NAME} ${idx}`;
-			this.switches.push(new Switch(switchName, this.log, this.api));
+			const uuid = this.api.hap.uuid.generate(SWITCH_UUID(idx));
+			this.switches.push(new Switch(name, uuid, this.log, this.api));
 		});
 
 		this.log.debug('Finished initializing platform:', this.config.name);
@@ -61,11 +55,11 @@ export class VirtualPresence implements AccessoryPlugin {
 	}
 
 	getOccupancyDetected() {
-		this.log.debug('Triggered GET OccupancyDetected');
 		const occupancyDetected = this.switches.some(s => s.on);
-		return occupancyDetected
-			? this.Characteristic.OccupancyDetected.OCCUPANCY_DETECTED
-			: this.Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED;
+		this.log.debug(
+			`Getting state of occupancy sensor ${this.config.name}: ${occupancyDetected}`
+		);
+		return occupancyDetected;
 	}
 }
 
@@ -75,16 +69,17 @@ class Switch {
 
 	constructor(
 		public readonly name: string,
+		public readonly uuid: string,
 		public readonly log: Logger,
 		private readonly api: API
 	) {
 		this.log.debug(`Creating switch ${name}`);
 		this.on = false;
-		this.service = new this.api.hap.Service.Switch(name);
+		this.service = new this.api.hap.Service.Switch(name, uuid);
 		this.service
 			.getCharacteristic(this.api.hap.Characteristic.On)
-			.onGet(this.getState)
-			.onSet(this.setState);
+			.onGet(this.getState.bind(this))
+			.onSet(this.setState.bind(this));
 	}
 
 	getState() {

@@ -34,7 +34,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@types/node", "npm:18.0.3"],\
-            ["@types/prettier", "npm:2.6.3"],\
             ["@typescript-eslint/eslint-plugin", "virtual:5b61a24972a5af2c21746762e0ea1c9119e1d9d29893281d4a3eb82be035ddd3990519343f7c23bee8d0c67f0d8469957e6b9fe96fd127d2f91de064dfa4a169#npm:5.30.5"],\
             ["@typescript-eslint/parser", "virtual:5b61a24972a5af2c21746762e0ea1c9119e1d9d29893281d4a3eb82be035ddd3990519343f7c23bee8d0c67f0d8469957e6b9fe96fd127d2f91de064dfa4a169#npm:5.30.5"],\
             ["eslint", "npm:8.19.0"],\
@@ -42,6 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:5b61a24972a5af2c21746762e0ea1c9119e1d9d29893281d4a3eb82be035ddd3990519343f7c23bee8d0c67f0d8469957e6b9fe96fd127d2f91de064dfa4a169#npm:4.2.1"],\
             ["homebridge", "npm:1.5.0"],\
             ["prettier", "npm:2.7.1"],\
+            ["rimraf", "npm:3.0.2"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"]\
           ],\
           "linkType": "SOFT"\
@@ -178,15 +178,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-18.0.3-c2cbe1f26e-5dec59fbbc.zip/node_modules/@types/node/",\
           "packageDependencies": [\
             ["@types/node", "npm:18.0.3"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@types/prettier", [\
-        ["npm:2.6.3", {\
-          "packageLocation": "./.yarn/cache/@types-prettier-npm-2.6.3-8d27063d48-e1836699ca.zip/node_modules/@types/prettier/",\
-          "packageDependencies": [\
-            ["@types/prettier", "npm:2.6.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -885,7 +876,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:5b61a24972a5af2c21746762e0ea1c9119e1d9d29893281d4a3eb82be035ddd3990519343f7c23bee8d0c67f0d8469957e6b9fe96fd127d2f91de064dfa4a169#npm:4.2.1"],\
             ["@types/eslint", null],\
             ["@types/eslint-config-prettier", null],\
-            ["@types/prettier", "npm:2.6.3"],\
+            ["@types/prettier", null],\
             ["eslint", "npm:8.19.0"],\
             ["eslint-config-prettier", "virtual:5b61a24972a5af2c21746762e0ea1c9119e1d9d29893281d4a3eb82be035ddd3990519343f7c23bee8d0c67f0d8469957e6b9fe96fd127d2f91de064dfa4a169#npm:8.5.0"],\
             ["prettier", "npm:2.7.1"],\
@@ -1429,7 +1420,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["homebridge-plugin-virtual-presence", "workspace:."],\
             ["@types/node", "npm:18.0.3"],\
-            ["@types/prettier", "npm:2.6.3"],\
             ["@typescript-eslint/eslint-plugin", "virtual:5b61a24972a5af2c21746762e0ea1c9119e1d9d29893281d4a3eb82be035ddd3990519343f7c23bee8d0c67f0d8469957e6b9fe96fd127d2f91de064dfa4a169#npm:5.30.5"],\
             ["@typescript-eslint/parser", "virtual:5b61a24972a5af2c21746762e0ea1c9119e1d9d29893281d4a3eb82be035ddd3990519343f7c23bee8d0c67f0d8469957e6b9fe96fd127d2f91de064dfa4a169#npm:5.30.5"],\
             ["eslint", "npm:8.19.0"],\
@@ -1437,6 +1427,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:5b61a24972a5af2c21746762e0ea1c9119e1d9d29893281d4a3eb82be035ddd3990519343f7c23bee8d0c67f0d8469957e6b9fe96fd127d2f91de064dfa4a169#npm:4.2.1"],\
             ["homebridge", "npm:1.5.0"],\
             ["prettier", "npm:2.7.1"],\
+            ["rimraf", "npm:3.0.2"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=7ad353"]\
           ],\
           "linkType": "SOFT"\

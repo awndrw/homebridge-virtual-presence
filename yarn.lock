@@ -126,13 +126,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prettier@npm:^2":
-  version: 2.6.3
-  resolution: "@types/prettier@npm:2.6.3"
-  checksum: e1836699ca189fff6d2a73dc22e028b6a6f693ed1180d5998ac29fa197caf8f85aa92cb38db642e4a370e616b451cb5722ad2395dab11c78e025a1455f37d1f0
-  languageName: node
-  linkType: hard
-
 "@typescript-eslint/eslint-plugin@npm:^5.30.5":
   version: 5.30.5
   resolution: "@typescript-eslint/eslint-plugin@npm:5.30.5"
@@ -1099,7 +1092,6 @@ __metadata:
   resolution: "homebridge-plugin-virtual-presence@workspace:."
   dependencies:
     "@types/node": ^18.0.3
-    "@types/prettier": ^2
     "@typescript-eslint/eslint-plugin": ^5.30.5
     "@typescript-eslint/parser": ^5.30.5
     eslint: ^8.19.0
@@ -1107,6 +1099,7 @@ __metadata:
     eslint-plugin-prettier: ^4.2.1
     homebridge: ^1.5.0
     prettier: ^2.7.1
+    rimraf: ^3.0.2
     typescript: ^4.7.4
   languageName: unknown
   linkType: soft

@@ -5,7 +5,7 @@
   "schema": {
     "type": "object",
     "properties": {
-      "occupancyName": {
+      "name": {
         "title": "Name",
         "description": "Name of the occupancy sensor",
         "type": "string",
@@ -18,7 +18,7 @@
         "type": "array",
         "required": true,
         "items": {
-          "title": "Name",
+          "title": "Switch",
           "description": "Name of the switch",
           "type": "string"
         }
