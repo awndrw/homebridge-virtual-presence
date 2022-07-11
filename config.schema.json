@@ -7,17 +7,21 @@
     "properties": {
       "occupancyName": {
         "title": "Name",
+        "description": "Name of the occupancy sensor",
         "type": "string",
         "required": true,
-        "default": false,
-        "description": "Name of the occupancy sensor"
+        "default": "Occupancy Sensor"
       },
       "switches": {
         "title": "Switches",
+        "description": "Switches to be used to trigger occupancy sensor",
         "type": "array",
         "required": true,
-        "default": [],
-        "description": "Switches to be used to trigger occupancy sensor"
+        "items": {
+          "title": "Name",
+          "description": "Name of the switch",
+          "type": "string"
+        }
       }
     }
   }

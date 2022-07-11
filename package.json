@@ -1,7 +1,7 @@
 {
   "displayName": "Virtual Presence",
   "name": "homebridge-plugin-virtual-presence",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "PRERELEASE. Allows for the creation of presence detecting switches that are combined into an occupancy sensor.",
   "license": "Apache-2.0",
   "repository": {

@@ -24,10 +24,14 @@ export class VirtualPresence implements AccessoryPlugin {
 		public readonly config: VirtualPresenceConfig,
 		public readonly api: API
 	) {
-		this.log.debug('VirtualPresence plugin loaded');
-
 		this.Service = this.api.hap.Service;
 		this.Characteristic = this.api.hap.Characteristic;
+
+		this.log.debug(
+			`VirtualPresence plugin loaded with config ${JSON.stringify(
+				config
+			)}`
+		);
 
 		this.informationService = new this.Service.AccessoryInformation()
 			.setCharacteristic(this.Characteristic.Manufacturer, 'wiggindev')
