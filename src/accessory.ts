@@ -5,11 +5,12 @@ import {
 	Service,
 	CharacteristicValue,
 } from 'homebridge';
-import { VirtualPresenceConfig } from './types';
-
-const BASE_PATH = 'virtual-presence';
-const MANUFACTURER = 'wiggindev';
-const MODEL = 'Virtual Presence';
+import {
+	PLUGIN_NAME,
+	ACCESSORY_NAME,
+	ACCESSORY_MANUFACTURER,
+	VirtualPresenceConfig,
+} from './constants';
 
 export class VirtualPresence implements AccessoryPlugin {
 	private readonly informationService: Service;
@@ -27,8 +28,11 @@ export class VirtualPresence implements AccessoryPlugin {
 		this.config.accessory = this.config.name;
 
 		const informationService = new Service.AccessoryInformation()
-			.setCharacteristic(Characteristic.Manufacturer, MANUFACTURER)
-			.setCharacteristic(Characteristic.Model, MODEL);
+			.setCharacteristic(
+				Characteristic.Manufacturer,
+				ACCESSORY_MANUFACTURER
+			)
+			.setCharacteristic(Characteristic.Model, ACCESSORY_NAME);
 
 		const occupancyService = new Service.OccupancySensor(
 			this.config.name,
@@ -66,7 +70,7 @@ export class VirtualPresence implements AccessoryPlugin {
 	};
 
 	private generateUuid = (...ids: Array<string | number>): string => {
-		const path = [BASE_PATH, this.config.name, ...ids];
+		const path = [PLUGIN_NAME, this.config.name, ...ids];
 		return this.api.hap.uuid.generate(path.join('.'));
 	};
 }
