@@ -4,4 +4,8 @@ import { VirtualPresence } from './accessory';
 import { PLUGIN_NAME, ACCESSORY_NAME } from './constants';
 
 export default (api: API) =>
-	api.registerAccessory(PLUGIN_NAME, ACCESSORY_NAME, VirtualPresence);
+	api.registerAccessory(
+		PLUGIN_NAME,
+		ACCESSORY_NAME.replace(/ +/g, ''),
+		VirtualPresence
+	);
