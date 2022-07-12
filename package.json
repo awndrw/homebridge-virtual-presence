@@ -1,7 +1,7 @@
 {
 	"displayName": "Virtual Presence",
 	"name": "homebridge-virtual-presence",
-	"version": "1.1.1",
+	"version": "1.2.0",
 	"description": "Allows for the creation of presence detecting switches that are combined into an occupancy sensor.",
 	"license": "Apache-2.0",
 	"repository": {
@@ -19,7 +19,7 @@
 	"scripts": {
 		"lint": "eslint .",
 		"clean": "rimraf dist",
-		"build": "yarn clean && tsc",
+		"build": "yarn clean && tsc --build src",
 		"prepack": "yarn build",
 		"prepublish": "yarn lint"
 	},

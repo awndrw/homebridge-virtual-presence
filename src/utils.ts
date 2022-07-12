@@ -1,13 +1,11 @@
 import type { AccessoryConfig, Service } from 'homebridge';
 
-export const PLUGIN_NAME = 'virtual-presence';
-export const ACCESSORY_NAME = 'Virtual Presence';
-export const ACCESSORY_MANUFACTURER = 'wiggindev';
-
-export const OCCUPANCY_SENSOR = 'occupancy-sensor';
-export const SWITCH = 'switch';
-
 export const clean = (str: string) => str.replace(/\s+/g, '');
+
+export const createId = (...segments: AnyString[]): string =>
+	segments
+		.reduce((prev, cur) => `${prev}.${clean(cur.toString())}`, '')
+		.toString();
 
 export type AnyString = string | { toString(): string };
 
@@ -17,7 +15,7 @@ export interface VirtualPresenceConfig extends AccessoryConfig {
 }
 
 export interface Switch {
-	id: string;
-	on: boolean;
+	readonly id: string;
+	readonly isOn: () => boolean;
 	readonly service: Service;
 }

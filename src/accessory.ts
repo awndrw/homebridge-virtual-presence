@@ -1,23 +1,12 @@
-import type {
-	AccessoryPlugin,
-	Logger,
-	API,
-	Service,
-	CharacteristicValue,
-} from 'homebridge';
-
+import type { AccessoryPlugin, Logger, API, Service } from 'homebridge';
+import { VirtualPresenceConfig, Switch, AnyString, createId } from './utils';
 import {
 	PLUGIN_NAME,
-	ACCESSORY_NAME,
 	ACCESSORY_MANUFACTURER,
 	OCCUPANCY_SENSOR,
 	SWITCH,
-	VirtualPresenceConfig,
-	Switch,
-	clean,
-	AnyString,
-} from './utils';
-import { version } from '../package.json';
+	PLUGIN_VERSION,
+} from './constants';
 
 export class VirtualPresence implements AccessoryPlugin {
 	private readonly informationService: Service;
@@ -37,12 +26,12 @@ export class VirtualPresence implements AccessoryPlugin {
 				Characteristic.Manufacturer,
 				ACCESSORY_MANUFACTURER
 			)
-			.setCharacteristic(Characteristic.Model, ACCESSORY_NAME)
+			.setCharacteristic(Characteristic.Model, PLUGIN_NAME)
 			.setCharacteristic(
 				Characteristic.SerialNumber,
 				this.getAccessoryId()
 			)
-			.setCharacteristic(Characteristic.FirmwareRevision, version);
+			.setCharacteristic(Characteristic.FirmwareRevision, PLUGIN_VERSION);
 
 		this.occupancyService = new Service.OccupancySensor(
 			this.config.name,
@@ -67,7 +56,7 @@ export class VirtualPresence implements AccessoryPlugin {
 	];
 
 	private getOccupancyDetected = () => {
-		const occupancyDetected = this.switches.some(s => s.on);
+		const occupancyDetected = this.switches.some(s => s.isOn());
 		this.log.debug(
 			`Getting state of occupancy sensor ${this.config.name}: ${occupancyDetected}`
 		);
@@ -78,17 +67,16 @@ export class VirtualPresence implements AccessoryPlugin {
 		this.log.debug(`Creating switch ${name}`);
 		const id = this.getAccessoryId(SWITCH, name, idx);
 		const uuid = this.api.hap.uuid.generate(id);
-		let on = false;
 		const service = new this.api.hap.Service.Switch(name, uuid);
-		service
-			.getCharacteristic(this.api.hap.Characteristic.On)
-			.onGet(() => on)
-			.onSet((value: CharacteristicValue) => (on = value as boolean));
-		return { id, on, service };
+		return {
+			id,
+			service,
+			isOn: () =>
+				service.getCharacteristic(this.api.hap.Characteristic.On)
+					.value as boolean,
+		};
 	};
 
-	private getAccessoryId = (...ids: Array<AnyString>) =>
-		[PLUGIN_NAME, clean(this.config.name)]
-			.concat(ids.map(id => clean(`${id}`)))
-			.join('.');
+	private getAccessoryId = (...ids: AnyString[]) =>
+		createId(PLUGIN_NAME, this.config.name, ...ids);
 }
