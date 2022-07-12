@@ -1,11 +1,11 @@
-import { API } from 'homebridge';
+import type { API } from 'homebridge';
 
 import { VirtualPresence } from './accessory';
-import { PLUGIN_NAME, ACCESSORY_NAME } from './constants';
+import { PLUGIN_NAME, ACCESSORY_NAME, clean } from './utils';
 
 export default (api: API) =>
 	api.registerAccessory(
-		PLUGIN_NAME,
-		ACCESSORY_NAME.replace(/ +/g, ''),
+		`homebridge-${PLUGIN_NAME}`,
+		clean(ACCESSORY_NAME),
 		VirtualPresence
 	);
